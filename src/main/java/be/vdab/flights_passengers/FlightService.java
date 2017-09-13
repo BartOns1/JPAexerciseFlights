@@ -14,4 +14,12 @@ public class FlightService {
     public Flight findById(int Id){
         return fr.readId(Id);
     }
+
+    public void persist(Flight f){
+        fr.save(f);
+    }
+
+    public void DeleteById(Integer id){
+        fr.deleteById(id);
+    }
 }

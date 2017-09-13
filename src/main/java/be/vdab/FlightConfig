@@ -1,6 +1,6 @@
-package be.vdab.flights_passengers;
+//package be.vdab.flights_passengers;
 
-import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -20,8 +20,8 @@ import java.util.List;
  * Created by vdabcursist on 12/09/2017.
  */
 
-@Configuration
-public class FlightConfiguration {
+//@Configuration
+//public class FlightConfiguration {
 
 /*    @Bean
     public List<String> names() {
@@ -33,6 +33,7 @@ public class FlightConfiguration {
     // een bestande klasse String kan je geen @Component boven zetten, dan moet je met een config file werken
 
 
+/*
 
     @Bean
     public DataSource dataSource(){
@@ -57,13 +58,14 @@ public class FlightConfiguration {
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
         return new JpaTransactionManager(emf);
     }
+*/
 
-    @Bean
+/*    @Bean
     public JpaVendorAdapter jpaVendorAdapter(){
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setDatabase(Database.MYSQL);
         adapter.setGenerateDdl(true);
         adapter.setShowSql(true);
         return adapter;
-    }
+    }*/
 }

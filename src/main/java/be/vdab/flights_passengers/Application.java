@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @SpringBootApplication
 public class Application {
 //een voorbeeld met een persistence (respository), service en presentation layer, maar de presentation layer ontbreekt en dedatabase is voorlopig vervangen door listings
@@ -27,21 +28,9 @@ public class Application {
 
 		TicketRespository tr = ac.getBean(TicketRespository.class);
 
-/*
-		Ticket t1 = rs.bookTicketForFlight(2,456,3);
-		System.out.println("Het aangemaakte ticket is" + t1);
+		FlightService fs = ac.getBean(FlightService.class);
 
-		Ticket t2 = rs.bookTicketForFlight(1,500,1);
-		System.out.println("Het aangemaakte ticket is" + t2);
-
-		Ticket t3 = rs.bookTicketForFlight(4,400,3);
-		System.out.println("Het aangemaakte ticket is" + t3);
-
-		tickets = (rs.ts.tr.getTickets());
-		for(Ticket t:tickets){
-			System.out.println(t.toString());
-		}*/
-
+		PassengerService ps = ac.getBean(PassengerService.class);
 
 		Passenger p = new Passenger("Jimi","Hendrix", 157);
 		pr.save(p);
@@ -52,7 +41,7 @@ public class Application {
 		p = new Passenger("Bindokov","Alexindirg", 157);
 		pr.save(p);
 		p = new Passenger("The","Donn", 157);
-		pr.save(p);
+		ps.addPassenger(p);
 
 
 		Flight f = new Flight("AB546F","Brussel", "Wenen");
@@ -61,10 +50,10 @@ public class Application {
 		fr.save(f);
 		f = new Flight("IKS55","Brussel", "Tokio");
 		fr.save(f);
+		f = new Flight("JET778","Charleroi", "Bonn");
+        fs.persist(f);
 
-
-		Ticket t = new Ticket(pr.readById(1),500,fr.readId(2));
-		tr.save(t);
+		rs.bookTicketForFlight(1,550,1);
 
 
 	}
