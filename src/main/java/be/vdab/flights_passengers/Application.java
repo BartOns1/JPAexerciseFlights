@@ -1,4 +1,4 @@
-package be.vdab.flights.Passengers;
+package be.vdab.flights_passengers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,7 +21,13 @@ public class Application {
 		PassengerRespository pr = ac.getBean(PassengerRespository.class);
 		System.out.println(pr.findAll());
 
+		FlightRespository fr = ac.getBean(FlightRespository.class);
+
 		ReservationService rs = ac.getBean(ReservationService.class);
+
+		TicketRespository tr = ac.getBean(TicketRespository.class);
+
+/*
 		Ticket t1 = rs.bookTicketForFlight(2,456,3);
 		System.out.println("Het aangemaakte ticket is" + t1);
 
@@ -31,9 +37,35 @@ public class Application {
 		Ticket t3 = rs.bookTicketForFlight(4,400,3);
 		System.out.println("Het aangemaakte ticket is" + t3);
 
-		tickets = (rs.ts.tr.tickets);
+		tickets = (rs.ts.tr.getTickets());
 		for(Ticket t:tickets){
 			System.out.println(t.toString());
-		}
+		}*/
+
+
+		Passenger p = new Passenger("Jimi","Hendrix", 157);
+		pr.save(p);
+		p = new Passenger("Jhon","postland", 157);
+		pr.save(p);
+		p = new Passenger("Aliondra","vintag", 157);
+		pr.save(p);
+		p = new Passenger("Bindokov","Alexindirg", 157);
+		pr.save(p);
+		p = new Passenger("The","Donn", 157);
+		pr.save(p);
+
+
+		Flight f = new Flight("AB546F","Brussel", "Wenen");
+		fr.save(f);
+		f = new Flight("JKL2F","Brussel", "Amsterdam");
+		fr.save(f);
+		f = new Flight("IKS55","Brussel", "Tokio");
+		fr.save(f);
+
+
+		Ticket t = new Ticket(pr.readById(1),500,fr.readId(2));
+		tr.save(t);
+
+
 	}
 }

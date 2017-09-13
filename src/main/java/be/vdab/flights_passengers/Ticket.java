@@ -1,6 +1,4 @@
-package be.vdab.flights.Passengers;
-
-import com.sun.istack.internal.NotNull;
+package be.vdab.flights_passengers;
 
 import javax.persistence.*;
 
@@ -10,22 +8,29 @@ import javax.persistence.*;
 @Entity
 public class Ticket {
 
-    @Column(nullable=false)
+    @JoinColumn(nullable=false, name = "passenger_id")
+    @ManyToOne
     private Passenger p;
 
     private double price;
 
-    @Column(nullable=false)
-    private Flight f;
+    @JoinColumn(nullable=false)
+    @ManyToOne
+    private Flight flight;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * Used by JPA.
+     */
+    Ticket(){};
+
     public Ticket(Passenger p, double price, Flight f) {
         this.p = p;
         this.price = price;
-        this.f = f;
+        this.flight = f;
     }
 
     public Passenger getPassenger() {
@@ -34,6 +39,7 @@ public class Ticket {
 
     public void setPassenger(Passenger p) {
         this.p = p;
+        p.addTicket(this);
     }
 
     public double getPrice() {
@@ -45,11 +51,12 @@ public class Ticket {
     }
 
     public Flight getFlight() {
-        return f;
+        return flight;
     }
 
     public void setFlight(Flight f) {
-        this.f = f;
+        this.flight = f;
+        p.addTicket(this);
     }
 
     @Override
@@ -57,7 +64,7 @@ public class Ticket {
         return "Ticket{" +
                 "p=" + p +
                 ", price=" + price +
-                ", f=" + f +
+                ", f=" + flight +
                 '}';
     }
 }

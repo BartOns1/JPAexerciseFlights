@@ -1,4 +1,4 @@
-package be.vdab.flights.Passengers;
+package be.vdab.flights_passengers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

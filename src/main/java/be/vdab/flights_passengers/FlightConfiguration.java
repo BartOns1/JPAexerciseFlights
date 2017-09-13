@@ -1,4 +1,4 @@
-package be.vdab.flights.Passengers;
+package be.vdab.flights_passengers;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,7 +49,7 @@ public class FlightConfiguration {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         emf.setDataSource(ds);
         emf.setJpaVendorAdapter(jva);
-        emf.setPackagesToScan("be.vdab.flights.Passengers");
+        emf.setPackagesToScan("be.vdab.flights_passengers");
         return emf;
     }
 

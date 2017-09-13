@@ -1,4 +1,4 @@
-package be.vdab.flights.Passengers;
+package be.vdab.flights_passengers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +14,21 @@ public class TicketService {
     TicketRespository tr;
 
 
-    public Ticket create(Flight f, double price, Passenger p){
+
+
+
+/*    public Ticket create(Flight f, double price, Passenger p){
         Ticket t = tr.persist(p, price,f);
         System.out.println("Ticket creation in TcketService:  " + t.toString());
         return t;
-    }
+    }*/
 
-    public boolean addTicket(List<Ticket> tickets, Ticket t){
-        return tickets.add(t);
-    }
+    public void addTicket(Ticket t){
+         tr.save(t);
+     }
+
+     public Ticket findById(Integer id){
+         return tr.readById(id);
+     }
+
 }

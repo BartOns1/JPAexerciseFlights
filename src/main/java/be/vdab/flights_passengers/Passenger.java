@@ -1,6 +1,8 @@
-package be.vdab.flights.Passengers;
+package be.vdab.flights_passengers;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by vdabcursist on 12/09/2017.
@@ -9,7 +11,7 @@ import javax.persistence.*;
 @Entity
 public class Passenger {
 
-
+    @Column(nullable=false)
     String firstName;
 
     @Id
@@ -20,8 +22,15 @@ public class Passenger {
     String lastName;
 
     @Column(name="BonusMyles")
-    private int frequentFlyerMyles;
+    private int frequentFlyerMyles = 0;
 
+    @OneToMany(mappedBy = "p")
+    private List<Ticket> tickets = new ArrayList<>();
+
+    /**
+     * Used by JPA.
+     */
+    Passenger(){};
 
 
     public Passenger(String firstName, String lastName) {
@@ -29,9 +38,15 @@ public class Passenger {
         this.lastName = lastName;
     }
 
+    public void addTicket(Ticket ticket){
+        tickets.add(ticket);
+        if(!ticket.getPassenger().equals(this)){
+            ticket.setPassenger(this);
+        }
+    }
 
     public Passenger(String firstName, String lastName, int frequentFlyerMyles) {
-        new Passenger(firstName,lastName);
+        this(firstName, lastName);
         this.frequentFlyerMyles=frequentFlyerMyles;
     }
 

@@ -1,4 +1,4 @@
-package be.vdab.flights.Passengers;
+package be.vdab.flights_passengers;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

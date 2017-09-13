@@ -1,8 +1,10 @@
-package be.vdab.flights.Passengers;
+package be.vdab.flights_passengers;
 
-import com.sun.istack.internal.NotNull;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by vdabcursist on 12/09/2017.
@@ -24,10 +26,25 @@ public class Flight {
     @Column(nullable=false)
     private String destination;
 
+    @OneToMany(mappedBy = "flight")
+    private List<Ticket> tickets = new ArrayList<>();
+
+
+    /**
+     * Used by JPA.
+     */
+    Flight(){};
+
     public Flight(String flightName, String departure, String destination) {
         this.flightName = flightName;
         this.departure = departure;
         this.destination = destination;
+    }
+
+
+    public void addTicket(Ticket ticket){
+        tickets.add(ticket);
+
     }
 
     public String getFlightName() {
@@ -62,4 +79,6 @@ public class Flight {
     public void setDestination(String destination) {
         this.destination = destination;
     }
+
+
 }

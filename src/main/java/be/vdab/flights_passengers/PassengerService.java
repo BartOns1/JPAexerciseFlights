@@ -1,4 +1,4 @@
-package be.vdab.flights.Passengers;
+package be.vdab.flights_passengers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,16 +15,7 @@ public class PassengerService {
 
     public String getAll() {
         System.out.println("get all inside passenger service");
-        return pr.findAll();
-
-
-       /* List<String> passengers = new ArrayList<>();
-        passengers.add("jimi");
-        passengers.add("Janis");
-        passengers.add("Amy");
-        passengers.add("Kurt");
-        passengers.add("Jim");
-        return passengers;*/
+        return pr.findAll().toString();
     }
 
 
@@ -32,4 +23,11 @@ public class PassengerService {
         return pr.readById(Id);
     }
 
+    public void addPassenger(Passenger p){
+        pr.save(p);
+    }
+
+    public void deletePassengerById(Integer id){
+        pr.deleteById(id);
+    }
 }
