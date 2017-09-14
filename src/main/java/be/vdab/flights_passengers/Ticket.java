@@ -7,10 +7,13 @@ import javax.persistence.*;
  */
 @Entity
 public class Ticket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @JoinColumn(nullable=false, name = "passenger_id")
     @ManyToOne
-    private Passenger p;
+    private Passenger pass;
 
     private double price;
 
@@ -18,9 +21,7 @@ public class Ticket {
     @ManyToOne
     private Flight flight;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+
 
     /**
      * Used by JPA.
@@ -28,17 +29,17 @@ public class Ticket {
     Ticket(){};
 
     public Ticket(Passenger p, double price, Flight f) {
-        this.p = p;
+        this.pass = p;
         this.price = price;
         this.flight = f;
     }
 
     public Passenger getPassenger() {
-        return p;
+        return pass;
     }
 
     public void setPassenger(Passenger p) {
-        this.p = p;
+        this.pass = p;
         p.addTicket(this);
     }
 
@@ -56,15 +57,11 @@ public class Ticket {
 
     public void setFlight(Flight f) {
         this.flight = f;
-        p.addTicket(this);
+        pass.addTicket(this);
     }
 
     @Override
     public String toString() {
-        return "Ticket{" +
-                "p=" + p +
-                ", price=" + price +
-                ", f=" + flight +
-                '}';
+        return "Ticket: passenger " + pass + ", price = " + price + ", " + flight ;
     }
 }

@@ -19,7 +19,7 @@ public class PassengerService {
     }
 
 
-    public Passenger getPassengerById(int Id){
+/*    public Passenger getPassengerById(int Id){
         return pr.readById(Id);
     }
 
@@ -29,5 +29,18 @@ public class PassengerService {
 
     public void deletePassengerById(Integer id){
         pr.deleteById(id);
+    }*/
+
+    public Passenger getPassengerById(int id){
+        return pr.findOne(id);
     }
+
+    public void addPassenger(Passenger p){
+        pr.save(p);
+    }
+
+    public void deletePassengerById(Integer id){
+        pr.delete(id);
+    }
+//Om rechten en paswoorden te gebruiken gebruik je "Spring security"
 }

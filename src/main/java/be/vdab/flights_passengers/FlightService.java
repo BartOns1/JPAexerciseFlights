@@ -11,8 +11,8 @@ public class FlightService {
     @Autowired
     FlightRespository fr;
 
-    public Flight findById(int Id){
-        return fr.readId(Id);
+    public Flight findById(Integer Id){
+        return fr.findOne(Id);
     }
 
     public void persist(Flight f){
@@ -20,6 +20,6 @@ public class FlightService {
     }
 
     public void DeleteById(Integer id){
-        fr.deleteById(id);
+        fr.delete(id);
     }
 }

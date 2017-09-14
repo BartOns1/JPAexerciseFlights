@@ -18,7 +18,9 @@ public class ReservationService {
     PassengerService ps;
 
     public void bookTicketForFlight(int passengerId, double price, int flightId){
-        ts.addTicket(new Ticket(ps.getPassengerById(passengerId),price, fs.findById(flightId)));
+        Passenger p = ps.getPassengerById(passengerId);
+        Flight f = fs.findById(flightId);
+        ts.addTicket(new Ticket(p,price, f));
     }
 
 

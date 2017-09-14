@@ -57,7 +57,7 @@ public class Flight {
 
     @Override
     public String toString() {
-        return "flight " + flightName ;
+        return "flight " + flightName  + " Departure = " + departure + "  Destination = " + destination;
     }
 
     public Integer getId() {

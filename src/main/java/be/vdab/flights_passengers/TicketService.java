@@ -10,18 +10,18 @@ import java.util.List;
  */
 @Service
 public class TicketService {
-    @Autowired
-    TicketRespository tr;
+  //  @Autowired
+   /* TicketRespository tr;
 
 
 
 
 
-/*    public Ticket create(Flight f, double price, Passenger p){
+*//*    public Ticket create(Flight f, double price, Passenger p){
         Ticket t = tr.persist(p, price,f);
         System.out.println("Ticket creation in TcketService:  " + t.toString());
         return t;
-    }*/
+    }*//*
 
     public void addTicket(Ticket t){
          tr.save(t);
@@ -29,6 +29,17 @@ public class TicketService {
 
      public Ticket findById(Integer id){
          return tr.readById(id);
-     }
+     }*/
+
+    @Autowired
+    TicketRepository2 tr;
+
+    public void  addTicket(Ticket t){
+        tr.save(t);
+    }
+
+    public Ticket findById(Integer id){
+        return tr.findOne(id);
+    }
 
 }

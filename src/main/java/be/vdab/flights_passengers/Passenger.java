@@ -24,7 +24,7 @@ public class Passenger {
     @Column(name="BonusMyles")
     private int frequentFlyerMyles = 0;
 
-    @OneToMany(mappedBy = "p")
+    @OneToMany(mappedBy = "pass")
     private List<Ticket> tickets = new ArrayList<>();
 
     /**
@@ -50,7 +50,7 @@ public class Passenger {
         this.frequentFlyerMyles=frequentFlyerMyles;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -1,15 +1,22 @@
 package be.vdab.flights_passengers;
 
-import org.springframework.stereotype.Repository;
+/*import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
+
+*/
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.List;
 
 /**
  * Created by vdabcursist on 12/09/2017.
- */
+ *//*
 
 @Transactional
 @Repository  //meer dan alleen maar component; component + extras voor respisotory
@@ -21,7 +28,8 @@ public class PassengerRespository {
 
 
     public List<Passenger> findAll(){
-        return null;
+        TypedQuery<Passenger> q = em.createQuery("SELECT p FROM Passenger p ORDER BY p.lastName", Passenger.class);
+        return q.getResultList();
       }
 
     public Passenger readById(int id){
@@ -37,5 +45,11 @@ public class PassengerRespository {
         Passenger p = em.getReference(Passenger.class, id);
         em.remove(p);
     }
+
+}*/
+
+
+interface PassengerRespository extends JpaRepository<Passenger, Integer> {
+    Passenger findByFirstNameAndLastName(String firstName, String lastName);
 
 }

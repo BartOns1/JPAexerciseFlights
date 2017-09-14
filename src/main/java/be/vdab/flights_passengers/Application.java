@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -12,29 +13,20 @@ import java.util.List;
 public class Application {
 //een voorbeeld met een persistence (respository), service en presentation layer, maar de presentation layer ontbreekt en dedatabase is voorlopig vervangen door listings
 	public static void main(String[] args) {
-		List<Ticket> tickets = new ArrayList<>();
-
-		ApplicationContext ac = SpringApplication.run(Application.class, args);
-
-		//PassengerService ps = ac.getBean(PassengerService.class);
-		//List<String> all = ps.getAll();
+        ApplicationContext ac = SpringApplication.run(Application.class, args);
 
 		PassengerRespository pr = ac.getBean(PassengerRespository.class);
-		System.out.println(pr.findAll());
-
 		FlightRespository fr = ac.getBean(FlightRespository.class);
+		TicketRepository2 tr = ac.getBean(TicketRepository2.class);
 
 		ReservationService rs = ac.getBean(ReservationService.class);
-
-		TicketRespository tr = ac.getBean(TicketRespository.class);
-
 		FlightService fs = ac.getBean(FlightService.class);
-
 		PassengerService ps = ac.getBean(PassengerService.class);
+		TicketService ts = ac.getBean(TicketService.class);
 
 		Passenger p = new Passenger("Jimi","Hendrix", 157);
 		pr.save(p);
-		p = new Passenger("Jhon","postland", 157);
+		p = new Passenger("John","Postland", 157);
 		pr.save(p);
 		p = new Passenger("Aliondra","vintag", 157);
 		pr.save(p);
@@ -44,17 +36,38 @@ public class Application {
 		ps.addPassenger(p);
 
 
-		Flight f = new Flight("AB546F","Brussel", "Wenen");
+		Flight f = new Flight("AB546F","Brussel", "Wenen intl.");
 		fr.save(f);
-		f = new Flight("JKL2F","Brussel", "Amsterdam");
+		f = new Flight("JKL2F","Brussel", "Amsterdam intl.");
 		fr.save(f);
 		f = new Flight("IKS55","Brussel", "Tokio");
 		fr.save(f);
 		f = new Flight("JET778","Charleroi", "Bonn");
         fs.persist(f);
 
-		rs.bookTicketForFlight(1,550,1);
+      List<Passenger> plist= pr.findAll();
+
+        for(Passenger ploop:plist){
+          System.out.println(ploop.toString());
+        }
+
+		rs.bookTicketForFlight(p.getId(),550,f.getId());
+        Ticket t = ts.findById(101);
+        System.out.println(t);
+
+        Flight f1 = fr.readByFlightName("JKL2F");
+        //Flight f1 = fr.readByFlightName("JKL2F");
 
 
+        System.out.println(f1.toString());
+
+        fr.findAllByDestinationContaining("intl.");
+
+        int j = tr.countByPriceIsGreaterThan(400);
+        System.out.println(j);
+        int i = tr.countTicketByPassFirstNameIsLikeAndPassLastNameIsLike("The", "Donn");
+
+        System.out.println(p.firstName + " heeft " + i + " tickets.");
+//rich_domain_model is de tegenpool van dit business model: respisotory-service-presentation layer
 	}
 }
