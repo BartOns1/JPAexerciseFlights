@@ -52,8 +52,10 @@ public class Application {
         }
 
 		rs.bookTicketForFlight(p.getId(),550,f.getId());
-        Ticket t = ts.findById(101);
-        System.out.println(t);
+        //Ticket t = ts.findById(101);
+        //System.out.println(t);
+        rs.bookTicketForFlight(p.getId(),550,f.getId()-1);
+        rs.bookTicketForFlight(p.getId(),550,f.getId());
 
         Flight f1 = fr.readByFlightName("JKL2F");
         //Flight f1 = fr.readByFlightName("JKL2F");
@@ -67,7 +69,14 @@ public class Application {
         System.out.println(j);
         int i = tr.countTicketByPassFirstNameIsLikeAndPassLastNameIsLike("The", "Donn");
 
-        System.out.println(p.firstName + " heeft " + i + " tickets.");
+        System.out.println(p.firstName + " " + p.lastName + " heeft " + i + " tickets.");
 //rich_domain_model is de tegenpool van dit business model: respisotory-service-presentation layer
+
+
+
+
+
+
+
 	}
 }
